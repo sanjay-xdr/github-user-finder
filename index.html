@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+     img {
+        margin-left: 500px;
+        border-radius: 30%;
+     }
+    </style>
+    <title>Github user Finder</title>
+</head>
+<body>
+
+    <div>
+  <textarea id="input" placeholder="enter the name of the user">sanjay</textarea><br>
+  <button onclick="grabthetxt()">CLICK</button>
+
+  <div id="placehere"></div>
+</div>
+
+
+<script>
+    const url= "https://api.github.com/users/"
+
+
+
+  function grabthetxt(){
+
+
+    var clear=document.getElementById("placehere");
+    
+
+    clear.innerText="";    
+    var userName=document.querySelector("#input").value;
+
+    var result=url.concat(userName);
+    var translatedtext="";
+    var name=fetch(result)
+    .then(response => response.json())
+    .then(json=>{
+        var translatedtext = json.avatar_url;
+        var elem = document.createElement("img");
+        elem.src = String(translatedtext);
+    elem.setAttribute("height", "600");
+    elem.setAttribute("width", "500");
+    elem.setAttribute("alt", "img");
+    document.getElementById("placehere").appendChild(elem);
+
+    var translatedtext1 = json.name;
+    console.log(translatedtext1);
+    
+    })
+
+     
+ 
+
+  }
+
+
+</script>
+    
+</body>
+</html>
